@@ -204,25 +204,55 @@ function arraysEqual(a, b) {
     return JSON.stringify(a) === JSON.stringify(b);
 }
 
+// function renderBoard() {
+//     gameBoard.innerHTML = "";
+//     for (let r = 0; r < 4; r++) {
+//         for (let c = 0; c < 4; c++) {
+//         if (board[r][c] !== 0) {
+//             const tile = document.createElement("div");
+//             tile.className = "tile";
+//             tile.classList.add(`tile-${board[r][c]}`);
+//             tile.textContent = board[r][c];
+//             tile.style.transform = `translate(${c * 110}px, ${r * 110}px)`;
+//             gameBoard.appendChild(tile);
+//         }
+//     }
+// }
+// scoreDisplay.textContent = `Score: ${score}`;
+// }
 function renderBoard() {
     gameBoard.innerHTML = "";
-    for (let r = 0; r < 4; r++) {
-        for (let c = 0; c < 4; c++) {
-        if (board[r][c] !== 0) {
-            const tile = document.createElement("div");
-            tile.className = "tile";
-            tile.classList.add(`tile-${board[r][c]}`);
-            tile.textContent = board[r][c];
-            tile.style.transform = `translate(${c * 110}px, ${r * 110}px)`;
-            gameBoard.appendChild(tile);
-        }
-    }
-}
-scoreDisplay.textContent = `Score: ${score}`;
-}
   
+    for (let r = 0; r < 4; r++) {
+      for (let c = 0; c < 4; c++) {
+        if (board[r][c] !== 0) {
+          const tile = document.createElement("div");
+          tile.className = "tile";
+          tile.classList.add(`tile-${board[r][c]}`);
+          tile.textContent = board[r][c];
+          
+          // 타일 위치 설정
+          tile.style.gridRow = r + 1; // 행은 1부터 시작
+          tile.style.gridColumn = c + 1; // 열은 1부터 시작
+  
+          gameBoard.appendChild(tile);
+        }
+      }
+    }
+  
+    scoreDisplay.textContent = `Score: ${score}`;
+  }
+  
+
+let width = window.innerWidth;
+let height = window.innerHeight;
+function updateSize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+}
 // 이벤트 리스너 등록
 document.addEventListener("keydown", handleInput);
-
+// 크기 변화 감지
+window.addEventListener('resize', updateSize);
 // 게임 시작
 initGame();
